@@ -1,0 +1,25 @@
+/* --Breakpoints-- */
+
+$screen-sm-max: 360px;
+$screen-md-max: 834px;
+$screen-lg-max: 1440px;
+
+/* --Mixins-- */
+
+@mixin sm {
+  @media (max-width: #{$screen-sm-max}) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (max-width: #{$screen-md-max}) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (max-width: #{$screen-lg-max}) {
+    @content;
+  }
+}
