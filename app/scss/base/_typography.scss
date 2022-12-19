@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+
+@use "../utils" as *;
+
+:root {
+  /* --Font families-- */
+
+  --ff-open-sans: 'Open Sans', sans-serif;
+
+  --ff-primary: var(--ff-open-sans);
+
+  /* --Font sizes-- */
+
+  --fs-34: rem(34); /* 34px */
+  --fs-30: rem(30); /* 30px */
+  --fs-26: rem(26); /* 26px */
+  --fs-24: rem(24); /* 24px */
+  --fs-22: rem(22); /* 22px */
+  --fs-20: rem(20); /* 20px */
+  --fs-18: rem(18); /* 18px */
+  --fs-16: rem(16); /* 16px */
+  --fs-13: rem(13); /* 13px */
+  --fs-12: rem(12); /* 12px */
+  --fs-10: rem(10); /* 10px */
+
+  --fs-heading-primary: var(--fs-34);
+  --fs-heading-secondary: var(--fs-30);
+  --fs-heading-tertiary: var(--fs-24);
+
+  --fs-subtitle-primary: var(--fs-20);
+  --fs-subtitle-secondary: var(--fs-12);
+
+  --fs-body-primary: var(--fs-20);
+  --fs-body-secondary: var(--fs-16);
+
+  --fs-caption-primary: var(--fs-13);
+  --fs-caption-secondary: var(--fs-10);
+
+  /* --Font weights-- */
+
+  --fw-bold: 700;
+  --fw-semi-bold: 600;
+  --fw-regular: 400;
+}
