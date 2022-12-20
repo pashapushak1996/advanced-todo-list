@@ -1,0 +1,11 @@
+@use "../utils/index" as *;
+
+.container {
+  max-width: rem(1375);
+  padding-inline: rem(32);
+  margin-inline: auto;
+
+  @include sm {
+    padding-inline: rem(16);
+  }
+}
