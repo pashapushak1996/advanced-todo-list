@@ -50,6 +50,7 @@ table {
 }
 
 html {
+  height: 100%;
   min-height: 100%;
   box-sizing: border-box;
 }
@@ -71,24 +72,24 @@ img {
 }
 
 :root {
-  --clr-primary: #0078D4;
+  --clr-primary: hsl(206,100%,42%);
   /*Todo change colors*/
-  --clr-secondary-1: #0D2960;
-  --clr-secondary-2: hsl(219, 66, 28);
-  --clr-secondary-3: hsl(219, 61, 32);
-  --clr-secondary-4: hsl(221, 31, 57);
-  --clr-secondary-5: hsl(222, 32, 82);
-  --clr-grey-1: hsl(30, 2, 37);
-  --clr-grey-2: hsl(30, 2, 53);
-  --clr-grey-3: hsl(30, 2, 62);
-  --clr-grey-4: hsl(0, 0, 87);
-  --clr-grey-5: hsl(30, 10, 92);
-  --clr-grey-6: hsl(0, 0, 95);
-  --clr-grey-7: hsl(0, 0, 99);
-  --clr-white: hsl(0, 0, 100);
-  --clr-black-1: hsl(0, 0, 0);
-  --clr-black-2: hsl(30, 3, 12);
-  --clr-black-3: hsl(30, 2, 19);
+  --clr-secondary-1: hsl(220,76%,21%);
+  --clr-secondary-2: hsl(219, 66%, 28%);
+  --clr-secondary-3: hsl(219, 61%, 32%);
+  --clr-secondary-4: hsl(221, 31%, 57%);
+  --clr-secondary-5: hsl(222, 32%, 82%);
+  --clr-grey-1: hsl(30, 2%, 37%);
+  --clr-grey-2: hsl(30, 2%, 53%);
+  --clr-grey-3: hsl(30, 2%, 62%);
+  --clr-grey-4: hsl(0, 0%, 87%);
+  --clr-grey-5: hsl(30, 10%, 92%);
+  --clr-grey-6: hsl(0, 0%, 95%);
+  --clr-grey-7: hsl(0, 0%, 99%);
+  --clr-white: hsl(0, 0%, 100%);
+  --clr-black-1: hsl(0, 0%, 0%);
+  --clr-black-2: hsl(30, 3%, 12%);
+  --clr-black-3: hsl(30, 2%, 19%);
 }
 
 /* --Breakpoints-- */
@@ -98,27 +99,29 @@ img {
   --ff-open-sans: "Open Sans", sans-serif;
   --ff-primary: var(--ff-open-sans);
   /* --Font sizes-- */
-  --fs-34: rem(34);
+  --fs-34: 2.125rem;
   /* 34px */
-  --fs-30: rem(30);
+  --fs-30: 1.875rem;
   /* 30px */
-  --fs-26: rem(26);
+  --fs-26: 1.625rem;
   /* 26px */
-  --fs-24: rem(24);
+  --fs-24: 1.5rem;
   /* 24px */
-  --fs-22: rem(22);
+  --fs-22: 1.375rem;
   /* 22px */
-  --fs-20: rem(20);
+  --fs-20: 1.25rem;
   /* 20px */
-  --fs-18: rem(18);
+  --fs-18: 1.125rem;
   /* 18px */
-  --fs-16: rem(16);
+  --fs-16: 1rem;
   /* 16px */
-  --fs-13: rem(13);
+  --fs-14: 0.875rem;
+  /* 14px */
+  --fs-13: 0.8125rem;
   /* 13px */
-  --fs-12: rem(12);
+  --fs-12: 0.75rem;
   /* 12px */
-  --fs-10: rem(10);
+  --fs-10: 0.625rem;
   /* 10px */
   --fs-heading-primary: var(--fs-34);
   --fs-heading-secondary: var(--fs-30);
@@ -127,12 +130,20 @@ img {
   --fs-subtitle-secondary: var(--fs-12);
   --fs-body-primary: var(--fs-20);
   --fs-body-secondary: var(--fs-16);
-  --fs-caption-primary: var(--fs-13);
-  --fs-caption-secondary: var(--fs-10);
+  --fs-form-body: var(--fs-14);
+  --fs-caption-primary: var(--fs-10);
+  --fs-caption-secondary: var(--fs-12);
   /* --Font weights-- */
   --fw-bold: 700;
   --fw-semi-bold: 600;
   --fw-regular: 400;
+}
+
+.wrapper {
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .container {
@@ -194,6 +205,187 @@ img {
   justify-content: center;
   align-items: center;
   gap: 0.25rem;
+}
+
+.main {
+  flex: 1 1 auto;
+  background-color: var(--clr-secondary-1);
+}
+
+.todo-form {
+  max-width: 53.75rem;
+  margin: 3.125rem auto;
+  padding-bottom: 3.75rem;
+  background-color: var(--clr-grey-7);
+  /* || Header */
+  /* || Body */
+  /* || Title */
+}
+.todo-form__header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 2rem 0;
+  border-bottom: 1px solid var(--clr-grey-5);
+}
+.todo-form__body {
+  padding-inline: 7.8125rem;
+}
+.todo-form__title {
+  margin-block: 1.25rem;
+  font-size: var(--fs-heading-secondary);
+  font-weight: var(--fw-bold);
+}
+
+.search-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  /* || Icon */
+  /* || Input */
+}
+.search-box__icon {
+  position: absolute;
+  top: 50%;
+  left: 0.9375rem;
+  width: 20px;
+  height: 20px;
+  transform: translateY(-50%);
+}
+.search-box__input {
+  height: 100%;
+  width: 100%;
+  padding: 8px 8px 8px 40px;
+  outline: none;
+  border: 1px solid var(--clr-grey-2);
+  border-radius: 5px;
+}
+.search-box__input::placeholder {
+  color: var(--clr-black-1);
+}
+
+.add-todo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  /* || Input */
+  /* || Button */
+}
+.add-todo__input {
+  flex-basis: 18.75rem;
+  padding: 0.375rem 0.5rem;
+  border: 1px solid var(--clr-grey-2);
+  border-radius: 2px;
+  outline: none;
+}
+.add-todo__input::placeholder {
+  color: var(--clr-black-1);
+}
+.add-todo__button {
+  padding: 0.375rem 1.25rem;
+  background-color: var(--clr-grey-6);
+  border-radius: 2px;
+  outline: none;
+  border: none;
+  color: var(--clr-grey-3);
+  font-weight: var(--fw-bold);
+  cursor: pointer;
+}
+.add-todo__button:hover, .add-todo__button:active {
+  background-color: var(--clr-grey-5);
+}
+
+.todo-list {
+  color: var(--clr-black-2);
+  font-size: var(--fs-form-body);
+  /* || Header */
+  /* || Categories */
+  /*|| Categories item */
+  /* || Sort by */
+  /* || Items */
+}
+.todo-list__header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.todo-list__categories {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3.125rem;
+}
+.todo-list__categories-item {
+  position: relative;
+  padding-bottom: 0.625rem;
+  cursor: pointer;
+}
+.todo-list__categories-item:hover:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--clr-primary);
+}
+.todo-list__sort-by {
+  position: relative;
+  margin-left: auto;
+  padding-bottom: 0.625rem;
+  font-size: var(--fs-caption-secondary);
+}
+.todo-list__sort-by::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -20px;
+  width: 10px;
+  height: 10px;
+  background-image: url("../../dist/images/sort-by-icon.png");
+}
+.todo-list__items {
+  border: 1px solid var(--clr-grey-4);
+  border-radius: 2px;
+}
+
+.todo-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-items: flex-start;
+  padding: 1rem;
+  border-bottom: 1px solid var(--clr-grey-5);
+  /* || Checkbox */
+  /* || Description */
+  /* || Name */
+  /* || Date */
+  /* || Icons */
+}
+.todo-item__checkbox {
+  width: 20px;
+  height: 20px;
+}
+.todo-item__description {
+  flex: 1;
+  margin-left: 0.5rem;
+}
+.todo-item__name {
+  margin-bottom: 0.3125rem;
+}
+.todo-item__date {
+  color: var(--clr-grey-1);
+  font-size: var(--fs-caption-primary);
+}
+.todo-item__icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.9375rem;
+  align-self: flex-end;
 }
 
 /*# sourceMappingURL=main.css.map */

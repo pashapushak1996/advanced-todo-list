@@ -15,6 +15,75 @@
 <body>
 <div class="wrapper">
   <template class="header-placeholder"></template>
+  <main class="main">
+    <form class="todo-form">
+      <div class="todo-form__header">
+        <label class="search-box" for="search-box-input">
+          <img src="./images/search-box-icon.png"
+               alt="search"
+               class="search-box__icon">
+          <input type="text"
+                 class="search-box__input"
+                 id="search-box-input"
+                 placeholder="Search some todo...">
+        </label>
+      </div>
+      <div class="todo-form__body">
+        <h2 class="todo-form__title">Todos</h2>
+        <div class="add-todo">
+          <input type="text" class="add-todo__input" placeholder="Add todo..">
+          <button class="add-todo__button" type="submit">Add</button>
+        </div>
+        <div class="todo-list">
+          <div class="todo-list__header">
+            <ul class="todo-list__categories">
+              <li class="todo-list__categories-item">All</li>
+              <li class="todo-list__categories-item">Active</li>
+              <li class="todo-list__categories-item">Completed</li>
+            </ul>
+            <span class="todo-list__sort-by">
+              Sort by
+            </span>
+          </div>
+          <div class="todo-list__items">
+            <div class="todo-item">
+              <input type="checkbox" class="todo-item__checkbox">
+              <div class="todo-item__description">
+                <h3 class="todo-item__name">Project name</h3>
+                <span class="todo-item__date">January 3, 2022, Monday</span>
+              </div>
+              <div class="todo-item__icons">
+                <img src="images/icon-edit.png" alt="edit" class="todo-item__icon">
+                <img src="images/icon-delete.png" alt="delete" class="todo-item__icon">
+              </div>
+            </div>
+            <div class="todo-item">
+              <input type="checkbox" class="todo-item__checkbox">
+              <div class="todo-item__description">
+                <h3 class="todo-item__name">Project name</h3>
+                <span class="todo-item__date">January 3, 2022, Monday</span>
+              </div>
+              <div class="todo-item__icons">
+                <img src="images/icon-edit.png" alt="edit" class="todo-item__icon">
+                <img src="images/icon-delete.png" alt="delete" class="todo-item__icon">
+              </div>
+            </div>
+            <div class="todo-item">
+              <input type="checkbox" class="todo-item__checkbox">
+              <div class="todo-item__description">
+                <h3 class="todo-item__name">Project name</h3>
+                <span class="todo-item__date">January 3, 2022, Monday</span>
+              </div>
+              <div class="todo-item__icons">
+                <img src="images/icon-edit.png" alt="edit" class="todo-item__icon">
+                <img src="images/icon-delete.png" alt="delete" class="todo-item__icon">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </main>
   <template class="footer-placeholder"></template>
 </div>
 <script src="js/app.js" type="module"></script>

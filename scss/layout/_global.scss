@@ -1,4 +1,11 @@
-@use "../utils/index" as *;
+@use "../utils" as *;
+
+.wrapper {
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
 
 .container {
   max-width: rem(1375);

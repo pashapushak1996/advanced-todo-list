@@ -11,17 +11,18 @@
 
   /* --Font sizes-- */
 
-  --fs-34: rem(34); /* 34px */
-  --fs-30: rem(30); /* 30px */
-  --fs-26: rem(26); /* 26px */
-  --fs-24: rem(24); /* 24px */
-  --fs-22: rem(22); /* 22px */
-  --fs-20: rem(20); /* 20px */
-  --fs-18: rem(18); /* 18px */
-  --fs-16: rem(16); /* 16px */
-  --fs-13: rem(13); /* 13px */
-  --fs-12: rem(12); /* 12px */
-  --fs-10: rem(10); /* 10px */
+  --fs-34: 2.125rem; /* 34px */
+  --fs-30: 1.875rem; /* 30px */
+  --fs-26: 1.625rem; /* 26px */
+  --fs-24: 1.5rem; /* 24px */
+  --fs-22: 1.375rem; /* 22px */
+  --fs-20: 1.25rem; /* 20px */
+  --fs-18: 1.125rem; /* 18px */
+  --fs-16: 1rem; /* 16px */
+  --fs-14: 0.875rem; /* 14px */
+  --fs-13: 0.8125rem; /* 13px */
+  --fs-12: 0.75rem; /* 12px */
+  --fs-10: 0.625rem; /* 10px */
 
   --fs-heading-primary: var(--fs-34);
   --fs-heading-secondary: var(--fs-30);
@@ -33,8 +34,10 @@
   --fs-body-primary: var(--fs-20);
   --fs-body-secondary: var(--fs-16);
 
-  --fs-caption-primary: var(--fs-13);
-  --fs-caption-secondary: var(--fs-10);
+  --fs-form-body: var(--fs-14);
+
+  --fs-caption-primary: var(--fs-10);
+  --fs-caption-secondary: var(--fs-12);
 
   /* --Font weights-- */
 

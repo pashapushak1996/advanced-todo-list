@@ -1,0 +1,66 @@
+@use '../utils' as *;
+
+.todo-list {
+  color: var(--clr-black-2);
+  font-size: var(--fs-form-body);
+  /* || Header */
+  &__header {
+    @include flexCenter;
+  }
+
+  /* || Categories */
+  &__categories {
+    @include flexCenter;
+    gap: rem(50);
+  }
+
+  /*|| Categories item */
+  &__categories-item {
+    position: relative;
+
+    padding-bottom: rem(10);
+
+    cursor: pointer;
+
+    &:hover:after {
+      content: '';
+
+      position: absolute;
+      bottom: 0;
+      left: 0;
+
+      width: 100%;
+      height: 2px;
+
+      background-color: var(--clr-primary);
+    }
+  }
+
+  /* || Sort by */
+  &__sort-by {
+    position: relative;
+
+    margin-left: auto;
+    padding-bottom: rem(10);
+
+    font-size: var(--fs-caption-secondary);
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -20px;
+
+      width: 10px;
+      height: 10px;
+
+      background-image: url("../../dist/images/sort-by-icon.png");
+    }
+  }
+
+  /* || Items */
+  &__items {
+    border: 1px solid var(--clr-grey-4);
+    border-radius: 2px;
+  }
+}

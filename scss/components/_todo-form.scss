@@ -1,0 +1,33 @@
+@use "../utils" as *;
+
+.todo-form {
+  max-width: rem(860);
+
+  margin: rem(50) auto;
+
+  padding-bottom: rem(60);
+
+  background-color: var(--clr-grey-7);
+  /* || Header */
+  &__header {
+    @include flexCenter;
+    height: 100%;
+
+    padding: rem(32) 0;
+
+    border-bottom: 1px solid var(--clr-grey-5);
+  }
+
+  /* || Body */
+  &__body {
+    padding-inline: rem(125);
+  }
+
+  /* || Title */
+  &__title {
+    margin-block: rem(20);
+
+    font-size: var(--fs-heading-secondary);
+    font-weight: var(--fw-bold);
+  }
+}

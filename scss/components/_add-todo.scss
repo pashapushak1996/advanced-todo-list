@@ -1,0 +1,46 @@
+@use "../utils" as *;
+
+.add-todo {
+  display: flex;
+  align-items: center;
+
+  gap: rem(8);
+
+  margin-bottom: rem(20);
+
+  /* || Input */
+  &__input {
+    flex-basis: rem(300);
+
+    padding: rem(6) rem(8);
+
+    border: 1px solid var(--clr-grey-2);
+    border-radius: 2px;
+
+    outline: none;
+
+    &::placeholder {
+      color: var(--clr-black-1);
+    }
+  }
+
+  /* || Button */
+  &__button {
+    padding: rem(6) rem(20);
+
+    background-color: var(--clr-grey-6);
+    border-radius: 2px;
+    outline: none;
+    border: none;
+
+    color: var(--clr-grey-3);
+    font-weight: var(--fw-bold);
+
+    cursor: pointer;
+
+    &:hover,
+    &:active {
+      background-color: var(--clr-grey-5);
+    }
+  }
+}

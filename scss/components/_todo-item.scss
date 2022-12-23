@@ -1,0 +1,40 @@
+@use "../utils" as *;
+
+.todo-item {
+  @include flexCenter;
+  align-items: flex-start;
+
+  padding: rem(16);
+
+  border-bottom: 1px solid var(--clr-grey-5);
+
+  /* || Checkbox */
+  &__checkbox {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* || Description */
+  &__description {
+    flex: 1;
+    margin-left: rem(8);
+  }
+
+  /* || Name */
+  &__name {
+    margin-bottom: rem(5);
+  }
+
+  /* || Date */
+  &__date {
+    color: var(--clr-grey-1);
+    font-size: var(--fs-caption-primary);
+  }
+
+  /* || Icons */
+  &__icons {
+    @include flexCenter;
+    gap: rem(15);
+    align-self: flex-end;
+  }
+}

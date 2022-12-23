@@ -1,0 +1,35 @@
+@use "../utils" as *;
+
+.search-box {
+  @include flexCenter;
+
+  position: relative;
+
+  /* || Icon */
+
+  &__icon {
+    position: absolute;
+    top: 50%;
+    left: rem(15);
+
+    width: 20px;
+    height: 20px;
+
+    transform: translateY(-50%);
+  }
+  /* || Input */
+
+  &__input {
+    height: 100%;
+    width: 100%;
+
+    padding: 8px 8px 8px 40px;
+    outline: none;
+    border: 1px solid var(--clr-grey-2);
+    border-radius: 5px;
+
+    &::placeholder {
+      color: var(--clr-black-1);
+    }
+  }
+}
