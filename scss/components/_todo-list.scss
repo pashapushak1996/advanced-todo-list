@@ -22,7 +22,8 @@
 
     cursor: pointer;
 
-    &:hover:after {
+    &:hover:after,
+    &--active:after {
       content: '';
 
       position: absolute;
@@ -33,6 +34,8 @@
       height: 2px;
 
       background-color: var(--clr-primary);
+
+
     }
   }
 

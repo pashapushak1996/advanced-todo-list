@@ -323,7 +323,7 @@ img {
   padding-bottom: 0.625rem;
   cursor: pointer;
 }
-.todo-list__categories-item:hover:after {
+.todo-list__categories-item:hover:after, .todo-list__categories-item--active:after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -370,11 +370,25 @@ img {
   height: 20px;
 }
 .todo-item__description {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
   flex: 1;
   margin-left: 0.5rem;
 }
 .todo-item__name {
+  padding: 0;
   margin-bottom: 0.3125rem;
+  border: none;
+  outline: none;
+  font-size: var(--fs-form-body);
+  font-weight: var(--fw-bold);
+}
+.todo-item__name--is-focus {
+  padding: 1px 2px;
+  border: 1px solid black;
+  font-weight: var(--fw-regular);
 }
 .todo-item__date {
   color: var(--clr-grey-1);
@@ -386,6 +400,9 @@ img {
   align-items: center;
   gap: 0.9375rem;
   align-self: flex-end;
+}
+.todo-item__icon {
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=main.css.map */

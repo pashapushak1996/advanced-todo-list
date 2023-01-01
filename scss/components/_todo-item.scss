@@ -16,13 +16,30 @@
 
   /* || Description */
   &__description {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+
     flex: 1;
     margin-left: rem(8);
   }
 
   /* || Name */
   &__name {
+    padding: 0;
     margin-bottom: rem(5);
+    border: none;
+    outline: none;
+
+    font-size: var(--fs-form-body);
+    font-weight: var(--fw-bold);
+
+    &--is-focus {
+      padding: 1px 2px;
+      border: 1px solid black;
+      font-weight: var(--fw-regular);
+    }
   }
 
   /* || Date */
@@ -37,4 +54,9 @@
     gap: rem(15);
     align-self: flex-end;
   }
+
+  &__icon {
+    cursor: pointer;
+  }
 }
+
