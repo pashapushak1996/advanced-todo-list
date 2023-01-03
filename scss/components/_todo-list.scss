@@ -3,18 +3,22 @@
 .todo-list {
   color: var(--clr-black-2);
   font-size: var(--fs-form-body);
+
   /* || Header */
+
   &__header {
     @include flexCenter;
   }
 
   /* || Categories */
+
   &__categories {
     @include flexCenter;
     gap: rem(50);
   }
 
   /*|| Categories item */
+
   &__categories-item {
     position: relative;
 
@@ -40,6 +44,7 @@
   }
 
   /* || Sort by */
+
   &__sort-by {
     position: relative;
 
@@ -47,6 +52,8 @@
     padding-bottom: rem(10);
 
     font-size: var(--fs-caption-secondary);
+
+    cursor: pointer;
 
     &::before {
       content: '';
@@ -62,6 +69,7 @@
   }
 
   /* || Items */
+
   &__items {
     border: 1px solid var(--clr-grey-4);
     border-radius: 2px;

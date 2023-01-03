@@ -34,8 +34,8 @@
           <input type="text"
                  class="add-todo__input"
                  placeholder="Add todo.."
-                 id="new-todo">
-          <button class="add-todo__button" type="submit">Add</button>
+                 id="new-todo-text">
+          <button class="add-todo__button" type="button" id="add-todo-btn">Add</button>
         </div>
         <div class="todo-list">
           <div class="todo-list__header">
@@ -51,7 +51,13 @@
               </li>
             </ul>
             <span class="todo-list__sort-by">
-              Sort by
+             <span> Sort by</span>
+              <div class="sort-popup" id="sort-popup">
+                <div class="sort-popup__item" data-sort-option="alphabetical-asc">Alphabetical</div>
+                <div class="sort-popup__item" data-sort-option="alphabetical-desc">Alphabetical</div>
+                <div class="sort-popup__item" data-sort-option="date-asc">Date</div>
+                <div class="sort-popup__item" data-sort-option="date-desc">Date</div>
+              </div>
             </span>
           </div>
           <div class="todo-list__items" id="todo-items">

@@ -6,14 +6,16 @@ const headerPlaceholder = document.querySelector('.header-placeholder');
 setHtmlTemplate('./templates/header.html', headerPlaceholder, 'header');
 // setHtmlTemplate('./templates/footer.html', footerPlaceholder);
 
-// DOM Elements
-const todoBody = document.querySelector('#new-todo');
-const todoForm = document.querySelector('#todo-form');
+/*--------------------------------------------DOM ELEMENTS------------------------------------------------------------*/
+
+const todoBody = document.querySelector('#new-todo-text');
+const addTodoBtn = document.querySelector('#add-todo-btn');
 const todoItemsContainer = document.querySelector('#todo-items');
 const categoriesList = document.querySelector('#categories');
 const categoriesElements = document.querySelectorAll('.todo-list__categories-item');
 
-// Class which defines app state
+/*-----------------------------------------------APP CLASS------------------------------------------------------------*/
+
 class App {
     constructor() {
         this.selectedCategory = 'all';
@@ -34,14 +36,28 @@ class App {
 
 const app = new App();
 
+/*-------------------------------------Event listeners functions for editing todo_item--------------------------------------*/
+
 const onChangeInputName = (todoObject) => (e) => {
-    todoObject.editBody(e.target.value);
+    const value = e.target.innerText;
+
+    todoObject.editBody(value);
 }
+
+const onClickEnter = (e) => {
+    if (e.key === 'Enter') {
+        e.target.classList.remove('todo-item__name--is-focus');
+
+        e.target.contentEditable = false;
+    }
+}
+
+/*-----------------------------------------TODO_ITEM CLASS------------------------------------------------------------*/
 
 class TodoItem {
     constructor(body) {
         this.body = body;
-        this.date = getCurrentDate();
+        this.date = new Date();
         this.isCompleted = false;
         this.id = generateId();
     }
@@ -50,29 +66,34 @@ class TodoItem {
         this.body = newBody;
     }
 
-    /*Change todo status*/
+    /*--------Change todo_item status------*/
+
     toggleCompleted() {
         this.isCompleted = !this.isCompleted;
     }
 
-    /*Creating HTML container for TodoItem */
+    /*------Creating HTML container for TodoItem-----*/
+
     createHtmlElement() {
+        console.log(this.date.getUTCDate());
         const { body, date, id, isCompleted } = this;
+
+        const normalizedDate = normalizeDate(date);
 
         const todoItemContainer = document.createElement('div');
 
         todoItemContainer.classList.add('todo-item');
         todoItemContainer.dataset.id = id;
 
+
         todoItemContainer.innerHTML = `
         <input type="checkbox" class="todo-item__checkbox" ${ isCompleted ? "checked" : '' }>
         <div class="todo-item__description">
-          <input type="text"
-                 name="todo-name" 
-                 class="todo-item__name" 
-                 value="${ body }"
-                 readonly>
-          <span  class="todo-item__date">${ date }</span>
+           <span class="todo-item__name" 
+                  role="textbox"
+                  id="todo-name"
+                  >${ body }</span>
+           <span  class="todo-item__date">${ normalizedDate }</span>
         </div>
         <div class="todo-item__icons">
           <img src="images/icon-edit.png" 
@@ -95,7 +116,10 @@ class TodoItem {
 
         deleteButton.addEventListener('click', deleteTodo);
         editButton.addEventListener('click', this.editTodo.bind(this));
-        todoBody.addEventListener('change', onChangeInputName(this));
+        todoBody.addEventListener('input', onChangeInputName(this));
+        todoBody.addEventListener('keypress', onClickEnter);
+
+        todoItemContainer.addEventListener('click', todoContainerOnClick(editButton, todoBody));
 
         return todoItemContainer;
     }
@@ -107,12 +131,42 @@ class TodoItem {
 
         input.classList.toggle('todo-item__name--is-focus');
 
-        input.readOnly = false;
+        const isFocused = input.classList.contains('todo-item__name--is-focus');
 
-        input.focus();
+        if (isFocused) {
+            input.contentEditable = true;
+
+            input.focus();
+        } else {
+            input.blur();
+
+            input.classList.remove('todo-item__name--is-focus');
+
+            input.contentEditable = false;
+        }
     }
 }
 
+
+function todoContainerOnClick(editButton, todoBody) {
+    const htmlElements = [editButton, todoBody];
+
+    return ({ target }) => {
+        const isTodoContainer = htmlElements.some(htmlElement => htmlElement === target);
+
+        if (isTodoContainer) {
+            return;
+        }
+
+        if (todoBody.classList.contains('todo-item__name--is-focus')) {
+            todoBody.classList.remove('todo-item__name--is-focus');
+
+            todoBody.contentEditable = false;
+        }
+    }
+}
+
+/*------------------------------------------------TODOS CLASS---------------------------------------------------------*/
 
 class Todos {
     constructor() {
@@ -138,9 +192,15 @@ class Todos {
     deleteTodo(todoId) {
         this.todos = this.todos.filter((todo) => todo.id !== todoId);
     }
+
+    sortTodos(sortBy, orderBy) {
+        this.todos = sortItems(this.todos, sortBy, orderBy)
+    }
 }
 
 const todoItems = new Todos();
+
+/*-----------------------------------------SELECT CATEGORY-----------------------------------------------------------*/
 
 function selectCategory({ target }) {
     const selectedCategory = target.getAttribute('data-category');
@@ -160,7 +220,7 @@ function selectCategory({ target }) {
     app.render();
 }
 
-categoriesList.addEventListener('click', selectCategory);
+/*----------------------------------------FILTER ACTIVE COMPLETED ITEMS-----------------------------------------------*/
 
 function filterTodoActiveItems(todo) {
     return !todo.isCompleted
@@ -170,8 +230,14 @@ function filterTodoCompletedItems(todo) {
     return todo.isCompleted
 }
 
+/*--------------------------------------------------CREATE ITEM-------------------------------------------------------*/
+
 function createTodo(e) {
     e.preventDefault();
+
+    if (!todoBody.value.trim()) {
+        return;
+    }
 
     const todoItem = new TodoItem(todoBody.value);
 
@@ -182,6 +248,8 @@ function createTodo(e) {
     todoBody.value = '';
 }
 
+/*-----------------------------------------------------DELETE ITEM----------------------------------------------------*/
+
 function deleteTodo(event) {
     const todoId = event.target.closest('.todo-item').dataset.id;
 
@@ -189,6 +257,8 @@ function deleteTodo(event) {
 
     app.render();
 }
+
+/*---------------------------------------------TOGGLE ITEM STATUS----------------------------------------------------*/
 
 function toggleTodoStatus(e) {
     if (e.target.type !== 'checkbox') {
@@ -206,12 +276,58 @@ function toggleTodoStatus(e) {
     app.render();
 }
 
+/*------------------------------------------------------SORT ITEMS---------------------------------------------------*/
+
+const sortBy = document.querySelector('.todo-list__sort-by');
+
+const sortPopup = document.querySelector('#sort-popup');
+
+const showPopup = () => {
+    sortPopup.classList.add('sort-popup--is-open');
+};
+
+const closePopup = () => {
+    sortPopup.classList.remove('sort-popup--is-open');
+};
+
+sortBy.addEventListener('mouseenter', showPopup);
+
+sortBy.addEventListener('mouseleave', closePopup);
+
+sortPopup.addEventListener('click', sortOnClick)
+
+function sortOnClick(e) {
+    const [sortBy, orderBy] = e.target.dataset.sortOption.split('-');
+
+    todoItems.sortTodos(sortBy, orderBy)
+
+    app.render();
+}
+
+const sortingFunctions = {
+    alphabetical: (itemOne, itemTwo) => itemOne.body > itemTwo.body ? 0 : -1,
+    date: (itemOne, itemTwo) => itemOne.date - itemTwo.date
+}
+
+function sortItems(items, sortBy, orderBy) {
+    const sortingFunction = sortingFunctions[sortBy];
+
+    return orderBy === 'asc'
+        ? items.sort(sortingFunction)
+        : items.sort(sortingFunction).reverse()
+}
+
+
+/*----------------------------------------------------EVENT LISTENERS------------------------------------------------*/
+
+categoriesList.addEventListener('click', selectCategory);
 todoItemsContainer.addEventListener('change', toggleTodoStatus);
+addTodoBtn.addEventListener('click', createTodo);
+
 
 /*------------------------------------------------------HELPERS------------------------------------------------------*/
 
-function getCurrentDate() {
-    const dateObj = new Date();
+function normalizeDate(dateObj) {
     const monthIndex = dateObj.getMonth();
     const month = getNormalizedMonth(monthIndex);
     const day = String(dateObj.getDate()).padStart(2, '0');
@@ -258,5 +374,3 @@ function getDayOfWeek(dayIndex) {
 function generateId() {
     return Math.random().toString(16).slice(2);
 }
-
-todoForm.addEventListener('submit', createTodo);

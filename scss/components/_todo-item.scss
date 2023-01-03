@@ -25,19 +25,20 @@
     margin-left: rem(8);
   }
 
-  /* || Name */
+  /* || Textarea */
   &__name {
-    padding: 0;
-    margin-bottom: rem(5);
-    border: none;
-    outline: none;
+    margin-bottom: rem(12);
 
     font-size: var(--fs-form-body);
     font-weight: var(--fw-bold);
 
+    border: none;
+    outline: none;
+
     &--is-focus {
-      padding: 1px 2px;
-      border: 1px solid black;
+      padding: rem(4) rem(2);
+      border: 1px solid var(--clr-grey-1);
+      border-radius: rem(2);
       font-weight: var(--fw-regular);
     }
   }
