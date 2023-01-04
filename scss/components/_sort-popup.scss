@@ -14,9 +14,8 @@
   border-radius: rem(2);
 
   &__item {
-    padding: rem(12);
+    padding: rem(12) rem(20);
 
-    text-align: center;
   }
 
   &__item:hover {

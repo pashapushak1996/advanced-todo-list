@@ -13,6 +13,7 @@ const addTodoBtn = document.querySelector('#add-todo-btn');
 const todoItemsContainer = document.querySelector('#todo-items');
 const categoriesList = document.querySelector('#categories');
 const categoriesElements = document.querySelectorAll('.todo-list__categories-item');
+const searchBox = document.querySelector('#search-box-input');
 
 /*-----------------------------------------------APP CLASS------------------------------------------------------------*/
 
@@ -75,7 +76,6 @@ class TodoItem {
     /*------Creating HTML container for TodoItem-----*/
 
     createHtmlElement() {
-        console.log(this.date.getUTCDate());
         const { body, date, id, isCompleted } = this;
 
         const normalizedDate = normalizeDate(date);
@@ -220,6 +220,9 @@ function selectCategory({ target }) {
     app.render();
 }
 
+
+categoriesList.addEventListener('click', selectCategory);
+
 /*----------------------------------------FILTER ACTIVE COMPLETED ITEMS-----------------------------------------------*/
 
 function filterTodoActiveItems(todo) {
@@ -247,6 +250,8 @@ function createTodo(e) {
 
     todoBody.value = '';
 }
+
+addTodoBtn.addEventListener('click', createTodo);
 
 /*-----------------------------------------------------DELETE ITEM----------------------------------------------------*/
 
@@ -276,6 +281,8 @@ function toggleTodoStatus(e) {
     app.render();
 }
 
+todoItemsContainer.addEventListener('change', toggleTodoStatus);
+
 /*------------------------------------------------------SORT ITEMS---------------------------------------------------*/
 
 const sortBy = document.querySelector('.todo-list__sort-by');
@@ -289,12 +296,6 @@ const showPopup = () => {
 const closePopup = () => {
     sortPopup.classList.remove('sort-popup--is-open');
 };
-
-sortBy.addEventListener('mouseenter', showPopup);
-
-sortBy.addEventListener('mouseleave', closePopup);
-
-sortPopup.addEventListener('click', sortOnClick)
 
 function sortOnClick(e) {
     const [sortBy, orderBy] = e.target.dataset.sortOption.split('-');
@@ -317,13 +318,29 @@ function sortItems(items, sortBy, orderBy) {
         : items.sort(sortingFunction).reverse()
 }
 
+sortBy.addEventListener('mouseenter', showPopup);
 
-/*----------------------------------------------------EVENT LISTENERS------------------------------------------------*/
+sortBy.addEventListener('mouseleave', closePopup);
 
-categoriesList.addEventListener('click', selectCategory);
-todoItemsContainer.addEventListener('change', toggleTodoStatus);
-addTodoBtn.addEventListener('click', createTodo);
+sortPopup.addEventListener('click', sortOnClick)
 
+/*--------------------------------------------------SEARCH ITEM-------------------------------------------------------*/
+
+const searchTodoItem = ({ target }) => {
+    const normalizedValue = target.value.trim();
+
+    const todoItemsElements = document.querySelectorAll('.todo-item');
+
+    todoItemsElements.forEach((todoElement) => {
+        const { innerText } = todoElement.querySelector('.todo-item__name');
+
+        innerText.includes(normalizedValue)
+            ? todoElement.classList.remove('todo-item--is-hidden')
+            : todoElement.classList.add('todo-item--is-hidden')
+    });
+};
+
+searchBox.addEventListener('input', searchTodoItem);
 
 /*------------------------------------------------------HELPERS------------------------------------------------------*/
 

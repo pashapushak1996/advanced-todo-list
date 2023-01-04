@@ -366,6 +366,9 @@ img {
   /* || Date */
   /* || Icons */
 }
+.todo-item--is-hidden {
+  display: none;
+}
 .todo-item__checkbox {
   width: 20px;
   height: 20px;
@@ -416,8 +419,7 @@ img {
   border-radius: 0.125rem;
 }
 .sort-popup__item {
-  padding: 0.75rem;
-  text-align: center;
+  padding: 0.75rem 1.25rem;
 }
 .sort-popup__item:hover {
   background-color: var(--clr-grey-6);

@@ -8,6 +8,10 @@
 
   border-bottom: 1px solid var(--clr-grey-5);
 
+  &--is-hidden {
+    display: none;
+  }
+
   /* || Checkbox */
   &__checkbox {
     width: 20px;
