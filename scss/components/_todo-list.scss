@@ -71,7 +71,23 @@
   /* || Items */
 
   &__items {
+    display: none;
+
     border: 1px solid var(--clr-grey-4);
     border-radius: 2px;
+  }
+
+
+  &__items--empty {
+    border: 1px solid var(--clr-grey-4);
+    border-radius: 2px;
+
+    @include flexCenter;
+    flex-direction: column;
+    padding: rem(50);
+
+    img {
+      margin-bottom: rem(50);
+    }
   }
 }

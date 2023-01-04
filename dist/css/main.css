@@ -349,8 +349,21 @@ img {
   background-image: url("../../dist/images/sort-by-icon.png");
 }
 .todo-list__items {
+  display: none;
   border: 1px solid var(--clr-grey-4);
   border-radius: 2px;
+}
+.todo-list__items--empty {
+  border: 1px solid var(--clr-grey-4);
+  border-radius: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 3.125rem;
+}
+.todo-list__items--empty img {
+  margin-bottom: 3.125rem;
 }
 
 .todo-item {

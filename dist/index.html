@@ -50,7 +50,7 @@
                   data-category="completed">Completed
               </li>
             </ul>
-            <span class="todo-list__sort-by">
+            <div class="todo-list__sort-by">
              <span> Sort by</span>
               <div class="sort-popup" id="sort-popup">
                 <div class="sort-popup__item" data-sort-option="alphabetical-asc">Alphabetical</div>
@@ -58,10 +58,14 @@
                 <div class="sort-popup__item" data-sort-option="date-asc">Date</div>
                 <div class="sort-popup__item" data-sort-option="date-desc">Date</div>
               </div>
-            </span>
+            </div>
           </div>
           <div class="todo-list__items" id="todo-items">
 
+          </div>
+          <div class="todo-list__items--empty">
+            <img src="./images/no-todos-icon.png" alt="no-todos">
+            <h3>No todos yet</h3>
           </div>
         </div>
       </div>

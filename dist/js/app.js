@@ -6,16 +6,17 @@ const headerPlaceholder = document.querySelector('.header-placeholder');
 setHtmlTemplate('./templates/header.html', headerPlaceholder, 'header');
 // setHtmlTemplate('./templates/footer.html', footerPlaceholder);
 
-/*--------------------------------------------DOM ELEMENTS------------------------------------------------------------*/
+/*------------------------------------------ || DOM ELEMENTS------------------------------------------------------------*/
 
 const todoBody = document.querySelector('#new-todo-text');
 const addTodoBtn = document.querySelector('#add-todo-btn');
 const todoItemsContainer = document.querySelector('#todo-items');
+const todoItemsEmptyContainer = document.querySelector('.todo-list__items--empty');
 const categoriesList = document.querySelector('#categories');
 const categoriesElements = document.querySelectorAll('.todo-list__categories-item');
 const searchBox = document.querySelector('#search-box-input');
 
-/*-----------------------------------------------APP CLASS------------------------------------------------------------*/
+/*------------------------------------------- || APP CLASS------------------------------------------------------------*/
 
 class App {
     constructor() {
@@ -27,6 +28,10 @@ class App {
     }
 
     render() {
+        const isEmpty = todoItems[this.selectedCategory].length;
+
+        toggleContainerVisibility(isEmpty);
+
         todoItemsContainer.innerHTML = '';
 
         const htmlElements = todoItems[this.selectedCategory].map((todoItem) => todoItem.createHtmlElement());
@@ -37,7 +42,19 @@ class App {
 
 const app = new App();
 
-/*-------------------------------------Event listeners functions for editing todo_item--------------------------------------*/
+/*-------------------------------- || TOGGLE ITEMS CONTAINER FUNCTION------------------------------------------------*/
+
+function toggleContainerVisibility(isEmpty) {
+    if (!isEmpty) {
+        todoItemsContainer.style.display = 'none';
+        todoItemsEmptyContainer.style.display = 'flex';
+    } else {
+        todoItemsContainer.style.display = 'block';
+        todoItemsEmptyContainer.style.display = 'none';
+    }
+}
+
+/*-------------------------------|| Event listeners functions for editing todo_item-----------------------------------*/
 
 const onChangeInputName = (todoObject) => (e) => {
     const value = e.target.innerText;
@@ -53,7 +70,7 @@ const onClickEnter = (e) => {
     }
 }
 
-/*-----------------------------------------TODO_ITEM CLASS------------------------------------------------------------*/
+/*------------------------------------- || TODO_ITEM CLASS------------------------------------------------------------*/
 
 class TodoItem {
     constructor(body) {
@@ -166,7 +183,7 @@ function todoContainerOnClick(editButton, todoBody) {
     }
 }
 
-/*------------------------------------------------TODOS CLASS---------------------------------------------------------*/
+/*-------------------------------------------- || TODOS CLASS---------------------------------------------------------*/
 
 class Todos {
     constructor() {
@@ -200,7 +217,7 @@ class Todos {
 
 const todoItems = new Todos();
 
-/*-----------------------------------------SELECT CATEGORY-----------------------------------------------------------*/
+/*------------------------------------- || SELECT CATEGORY-----------------------------------------------------------*/
 
 function selectCategory({ target }) {
     const selectedCategory = target.getAttribute('data-category');
@@ -223,7 +240,7 @@ function selectCategory({ target }) {
 
 categoriesList.addEventListener('click', selectCategory);
 
-/*----------------------------------------FILTER ACTIVE COMPLETED ITEMS-----------------------------------------------*/
+/*------------------------------------- || FILTER ACTIVE COMPLETED ITEMS--------------------------------------------*/
 
 function filterTodoActiveItems(todo) {
     return !todo.isCompleted
@@ -233,7 +250,7 @@ function filterTodoCompletedItems(todo) {
     return todo.isCompleted
 }
 
-/*--------------------------------------------------CREATE ITEM-------------------------------------------------------*/
+/*-------------------------------------------- || CREATE ITEM-------------------------------------------------------*/
 
 function createTodo(e) {
     e.preventDefault();
@@ -253,7 +270,7 @@ function createTodo(e) {
 
 addTodoBtn.addEventListener('click', createTodo);
 
-/*-----------------------------------------------------DELETE ITEM----------------------------------------------------*/
+/*------------------------------------------------ || DELETE ITEM----------------------------------------------------*/
 
 function deleteTodo(event) {
     const todoId = event.target.closest('.todo-item').dataset.id;
@@ -263,7 +280,7 @@ function deleteTodo(event) {
     app.render();
 }
 
-/*---------------------------------------------TOGGLE ITEM STATUS----------------------------------------------------*/
+/*----------------------------------------- || TOGGLE ITEM STATUS----------------------------------------------------*/
 
 function toggleTodoStatus(e) {
     if (e.target.type !== 'checkbox') {
@@ -283,7 +300,7 @@ function toggleTodoStatus(e) {
 
 todoItemsContainer.addEventListener('change', toggleTodoStatus);
 
-/*------------------------------------------------------SORT ITEMS---------------------------------------------------*/
+/*------------------------------------------------- || SORT ITEMS---------------------------------------------------*/
 
 const sortBy = document.querySelector('.todo-list__sort-by');
 
@@ -311,11 +328,11 @@ const sortingFunctions = {
 }
 
 function sortItems(items, sortBy, orderBy) {
-    const sortingFunction = sortingFunctions[sortBy];
+    const sortFunction = sortingFunctions[sortBy];
 
     return orderBy === 'asc'
-        ? items.sort(sortingFunction)
-        : items.sort(sortingFunction).reverse()
+        ? items.sort(sortFunction)
+        : items.sort(sortFunction).reverse()
 }
 
 sortBy.addEventListener('mouseenter', showPopup);
@@ -324,7 +341,7 @@ sortBy.addEventListener('mouseleave', closePopup);
 
 sortPopup.addEventListener('click', sortOnClick)
 
-/*--------------------------------------------------SEARCH ITEM-------------------------------------------------------*/
+/*----------------------------------------------- || SEARCH ITEM-------------------------------------------------------*/
 
 const searchTodoItem = ({ target }) => {
     const normalizedValue = target.value.trim();
@@ -341,6 +358,11 @@ const searchTodoItem = ({ target }) => {
 };
 
 searchBox.addEventListener('input', searchTodoItem);
+
+/*------------------------------------------------------INITIAL LOADING----------------------------------------------*/
+window.addEventListener('DOMContentLoaded', () => {
+
+});
 
 /*------------------------------------------------------HELPERS------------------------------------------------------*/
 
